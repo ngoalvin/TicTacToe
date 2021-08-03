@@ -17,14 +17,13 @@ const generateRandomOrder = () => {
     while (randomOrder.length !== 9) {
         let r = Math.floor(Math.random() * 9);
         if(randomOrder.indexOf(r) === -1) randomOrder.push(r);
-        console.log(randomOrder)
-    }
-}
+    };
+};
 
 // closes menu modal
 const closeStartModal = () => {
     modalBg2.classList.remove('bg-active');
-}
+};
 
 //-----------------------------CHECK WINNER FUNCTIONS-----------------------------------------------------------------
 
@@ -32,43 +31,41 @@ const checkHoriz = () => {
     for (let i = 0; i < 7; i+=3) {
         if (gridSquares[i].classList[1] && gridSquares[i].classList[1] === gridSquares[i + 1].classList[1] && gridSquares[i].classList[1] === gridSquares[i + 2].classList[1]) {
             winner = gridSquares[i].classList[1];
-        }
-    }
-}
+        };
+    };
+};
 
 const checkVert = () => {
     for (let i = 0; i < 3; i++) {
         if (gridSquares[i].classList[1] && gridSquares[i].classList[1] === gridSquares[i + 3].classList[1] && gridSquares[i].classList[1] === gridSquares[i + 6].classList[1]) {
             winner = gridSquares[i].classList[1];
-        }
-    }
-}
+        };
+    };
+};
 
 const checkDiag = () => {
     if (gridSquares[0].classList[1] && gridSquares[0].classList[1] === gridSquares[4].classList[1] && gridSquares[0].classList[1] === gridSquares[8].classList[1] ) {
         winner = gridSquares[0].classList[1];
     } else if (gridSquares[2].classList[1] && gridSquares[2].classList[1] === gridSquares[4].classList[1] && gridSquares[2].classList[1] === gridSquares[6].classList[1]) {
         winner = gridSquares[2].classList[1];
-        console.log(winner, 'diag')
-    }
-}
+    };
+};
 
 const checkTie = () => {
     for (let i =0; i < gridSquares.length; i++) {
         if (!gridSquares[i].classList[1]) {
             return false;
-        }
-    }
+        };
+    };
     winner = 'tie';
-    console.log(winner)
-}
+};
 
 const checkWinner = () => {
+    checkTie();
     checkHoriz();
     checkVert();
     checkDiag();
-    checkTie();
-}
+};
 
 //------------------------------------GAME STATUS-----------------------------------------------------------------------
 
@@ -76,22 +73,21 @@ const gameStatus = () => {
     checkWinner();
     if (winner) {
         if (winner === 'tie') {
-            let text = document.createTextNode(`The game ended in a tie!`)
+            let text = document.createTextNode(`The game ended in a tie!`);
             modalBg.classList.add('bg-active');
-            winnerDiv.appendChild(text)
+            winnerDiv.appendChild(text);
         } else {
-            let text = document.createTextNode(`${winner} has won the game!`)
+            let text = document.createTextNode(`${winner} has won the game!`);
             modalBg.classList.add('bg-active');
-            winnerDiv.appendChild(text)
-        }
-    }
-}
+            winnerDiv.appendChild(text);
+        };
+    };
+};
 
 //------------------------------------MODE CHECK FUNCTIONS----------------------------------------------------------------
 const randomMode = () => {
     mode = 'random';
     generateRandomOrder();
-    console.log(randomOrder)
     closeStartModal();
 }
 
@@ -104,7 +100,6 @@ const normalMode = () => {
 //--------------------------------------EVENT HANDLERS--------------------------------------------------------------
 
 const handleReset = (e) => {
-    console.log(e);
     xIsNext = true;
     inPlay = true;
     winner = null;
@@ -147,7 +142,6 @@ const handleSquareClick = (e) => {
         if (xIsNext) {
             gridSquares[randomOrder[randomOrder.length - 1]].classList.add('blue');
             randomOrder.pop();
-            console.log(randomOrder)
             gameStatus();
             xIsNext = !xIsNext;
             status.innerHTML = 'Blue is next';
@@ -157,8 +151,8 @@ const handleSquareClick = (e) => {
             randomOrder.pop();
             xIsNext = !xIsNext;
             status.innerHTML = 'Yellow is next';
-        }
-    }
+        };
+    };
 };
 
 //-------------------------------------EVENT LISTENERS----------------------------------------------------------------------
@@ -166,6 +160,5 @@ const handleSquareClick = (e) => {
 resetButton.addEventListener('click', handleReset);
 
 for (gridSquare of gridSquares) {
-    console.log(gridSquare)
-    gridSquare.addEventListener('click', handleSquareClick)
-}
+    gridSquare.addEventListener('click', handleSquareClick);
+};
