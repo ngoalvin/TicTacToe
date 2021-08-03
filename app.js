@@ -5,6 +5,29 @@ const resetButton = document.querySelector('.reset');
 let xIsNext = true;
 let winner = null;
 
+const checkHoriz = () => {
+
+}
+
+const checkVert = () => {
+
+}
+
+const checkDiag = () => {
+
+}
+
+const checkTie = () => {
+
+}
+
+const checkWinner = () => {
+    checkHoriz();
+    checkVert();
+    checkDiag();
+    checkTie();
+}
+
 const handleReset = (e) => {
     console.log(e);
 }
