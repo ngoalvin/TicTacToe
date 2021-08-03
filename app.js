@@ -89,12 +89,12 @@ const randomMode = () => {
     mode = 'random';
     generateRandomOrder();
     closeStartModal();
-}
+};
 
 const normalMode = () => {
     mode = 'normal';
     closeStartModal();
-}
+};
 
 
 //--------------------------------------EVENT HANDLERS--------------------------------------------------------------
