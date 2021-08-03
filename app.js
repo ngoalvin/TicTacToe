@@ -99,9 +99,8 @@ const normalMode = () => {
 
 //--------------------------------------EVENT HANDLERS--------------------------------------------------------------
 
-const handleReset = (e) => {
+const handleReset = () => {
     xIsNext = true;
-    inPlay = true;
     winner = null;
     mode = null;
     randomOrder = [];
