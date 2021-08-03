@@ -11,6 +11,8 @@ let winner = null;
 let mode = null;
 let randomOrder = [];
 
+
+// generates numbers 0-8 and pushes them into randomOrder array
 const generateRandomOrder = () => {
     while (randomOrder.length !== 9) {
         let r = Math.floor(Math.random() * 9);
@@ -18,6 +20,13 @@ const generateRandomOrder = () => {
         console.log(randomOrder)
     }
 }
+
+// closes menu modal
+const closeStartModal = () => {
+    modalBg2.classList.remove('bg-active');
+}
+
+//-----------------------------CHECK WINNER FUNCTIONS-----------------------------------------------------------------
 
 const checkHoriz = () => {
     for (let i = 0; i < 7; i+=3) {
@@ -61,23 +70,24 @@ const checkWinner = () => {
     checkTie();
 }
 
+//------------------------------------GAME STATUS-----------------------------------------------------------------------
+
 const gameStatus = () => {
     checkWinner();
     if (winner) {
         if (winner === 'tie') {
             let text = document.createTextNode(`The game ended in a tie!`)
             modalBg.classList.add('bg-active');
-
             winnerDiv.appendChild(text)
         } else {
             let text = document.createTextNode(`${winner} has won the game!`)
             modalBg.classList.add('bg-active');
-    
             winnerDiv.appendChild(text)
         }
     }
 }
 
+//------------------------------------MODE CHECK FUNCTIONS----------------------------------------------------------------
 const randomMode = () => {
     mode = 'random';
     generateRandomOrder();
@@ -90,9 +100,8 @@ const normalMode = () => {
     closeStartModal();
 }
 
-const closeStartModal = () => {
-    modalBg2.classList.remove('bg-active');
-}
+
+//--------------------------------------EVENT HANDLERS--------------------------------------------------------------
 
 const handleReset = (e) => {
     console.log(e);
@@ -115,11 +124,12 @@ const handleReset = (e) => {
 const handleSquareClick = (e) => {
     const classList = e.target.classList;
     if (mode === 'normal') {
+        // if square is clicked on show error
         if (classList[1] || winner) {
             error.classList.add('active');
             return;
         }
-    
+        // code to choose who is next
         if (xIsNext) {
             e.target.classList.add('blue');
             error.classList.remove('active');
@@ -151,6 +161,7 @@ const handleSquareClick = (e) => {
     }
 };
 
+//-------------------------------------EVENT LISTENERS----------------------------------------------------------------------
 
 resetButton.addEventListener('click', handleReset);
 
